@@ -7,7 +7,7 @@ sudo apt install shadowsocks
 
 cat << EOL | sudo tee /ss/ss.json
 {
-    "server": "0.0.0.0",
+    "server": "::",
     "timeout": 60,
     "method": "aes-256-cfb",
     "port_password": {
@@ -16,6 +16,7 @@ cat << EOL | sudo tee /ss/ss.json
     }
 }
 EOL
+
 
 
 cat << EOL | sudo tee /etc/systemd/system/shadowsocks-server.service
@@ -30,10 +31,13 @@ WantedBy=multi-user.target
 
 EOL
 
+
+
 sudo systemctl daemon-reload
 sudo systemctl enable shadowsocks-server.service
 sudo systemctl start shadowsocks-server.service
 sudo systemctl status shadowsocks-server.service
+
 
 # reboot
 
